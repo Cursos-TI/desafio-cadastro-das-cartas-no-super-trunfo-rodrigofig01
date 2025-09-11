@@ -1,10 +1,4 @@
-#include <stdio.h>
-
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
-//Teste larissa
+#include <stdio.h> // Biblioteca para funções de entrada e saída (printf, scanf)
 
 // Início da função principal do programa
 int main()
@@ -12,18 +6,20 @@ int main()
     /* * =======================================================
      * DECLARAÇÃO DE VARIÁVEIS PARA AS CARTAS
      * =======================================================
-     * Para cada carta, criamos um conjunto de variáveis para
-     * armazenar suas informações específicas.
+     * Além das variáveis básicas, adicionamos variáveis para
+     * armazenar os resultados dos novos cálculos.
      */
 
     // Variáveis para a Carta 1
     char estado1;
-    char codigo1[10];     // Um array para a string, ex: "A01"
-    char nomeCidade1[50]; // Array com espaço para nomes de cidades
+    char codigo1[10];
+    char nomeCidade1[50];
     int populacao1;
     float area1;
-    float pib1;
+    float pib1; // PIB em bilhões de reais
     int pontosTuristicos1;
+    float densidade1;    // NOVO: Para armazenar a densidade populacional
+    float pibPerCapita1; // NOVO: Para armazenar o PIB per capita
 
     // Variáveis para a Carta 2
     char estado2;
@@ -31,21 +27,19 @@ int main()
     char nomeCidade2[50];
     int populacao2;
     float area2;
-    float pib2;
+    float pib2; // PIB em bilhões de reais
     int pontosTuristicos2;
+    float densidade2;    // NOVO: Para armazenar a densidade populacional
+    float pibPerCapita2; // NOVO: Para armazenar o PIB per capita
 
     /* * =======================================================
-     * ENTRADA DE DADOS - CARTA 1
+     * ENTRADA DE DADOS E CÁLCULOS - CARTA 1
      * =======================================================
-     * O programa irá solicitar ao usuário que insira cada
-     * informação da primeira carta.
      */
 
     printf("--- CADASTRO DA CARTA 1 ---\n");
 
     printf("Digite o Estado (uma letra de 'A' a 'H'): ");
-    // O espaço antes de "%c" é importante para consumir qualquer 'enter'
-    // ou espaço que tenha ficado no buffer de entrada.
     scanf(" %c", &estado1);
 
     printf("Digite o Código da Carta (ex: A01): ");
@@ -60,16 +54,21 @@ int main()
     printf("Digite a Área (em km²): ");
     scanf("%f", &area1);
 
-    printf("Digite o PIB: ");
+    printf("Digite o PIB (em bilhões, ex: 699.28): ");
     scanf("%f", &pib1);
 
     printf("Digite o Número de Pontos Turísticos: ");
     scanf("%d", &pontosTuristicos1);
 
+    // NOVO: Realizando os cálculos para a Carta 1
+    // Para garantir a precisão, convertemos a população para float antes da divisão.
+    densidade1 = (float)populacao1 / area1;
+    // Multiplicamos o PIB por 1 bilhão para ter o valor real antes de dividir pela população.
+    pibPerCapita1 = (pib1 * 1000000000) / populacao1;
+
     /* * =======================================================
-     * ENTRADA DE DADOS - CARTA 2
+     * ENTRADA DE DADOS E CÁLCULOS - CARTA 2
      * =======================================================
-     * Agora, o programa solicita as informações da segunda carta.
      */
 
     printf("\n--- CADASTRO DA CARTA 2 ---\n");
@@ -89,17 +88,20 @@ int main()
     printf("Digite a Área (em km²): ");
     scanf("%f", &area2);
 
-    printf("Digite o PIB: ");
+    printf("Digite o PIB (em bilhões, ex: 300.50): ");
     scanf("%f", &pib2);
 
     printf("Digite o Número de Pontos Turísticos: ");
     scanf("%d", &pontosTuristicos2);
 
+    // NOVO: Realizando os cálculos para a Carta 2
+    densidade2 = (float)populacao2 / area2;
+    pibPerCapita2 = (pib2 * 1000000000) / populacao2;
+
     /* * =======================================================
      * EXIBIÇÃO DOS DADOS FINAIS
      * =======================================================
-     * Após o cadastro, o programa exibe um resumo organizado
-     * com todas as informações das duas cartas.
+     * O resumo agora inclui os novos campos calculados.
      */
 
     printf("\n\n============================================\n");
@@ -112,9 +114,12 @@ int main()
     printf("Código: %s\n", codigo1);
     printf("Nome da Cidade: %s\n", nomeCidade1);
     printf("População: %d\n", populacao1);
-    printf("Área: %.2f km²\n", area1); // "%.2f" formata para 2 casas decimais
+    printf("Área: %.2f km²\n", area1);
     printf("PIB: %.2f bilhões de reais\n", pib1);
     printf("Número de Pontos Turísticos: %d\n", pontosTuristicos1);
+    // NOVO: Exibindo os valores calculados formatados com 2 casas decimais
+    printf("Densidade Populacional: %.2f hab/km²\n", densidade1);
+    printf("PIB per Capita: %.2f reais\n", pibPerCapita1);
 
     // Exibindo dados da Carta 2
     printf("\nCarta 2:\n");
@@ -125,9 +130,11 @@ int main()
     printf("Área: %.2f km²\n", area2);
     printf("PIB: %.2f bilhões de reais\n", pib2);
     printf("Número de Pontos Turísticos: %d\n", pontosTuristicos2);
+    // NOVO: Exibindo os valores calculados formatados com 2 casas decimais
+    printf("Densidade Populacional: %.2f hab/km²\n", densidade2);
+    printf("PIB per Capita: %.2f reais\n", pibPerCapita2);
 
-    printf("\n"); // Adiciona uma linha em branco no final para melhor formatação
+    printf("\n");
 
-    // Retorna 0 para indicar que o programa foi executado com sucesso
     return 0;
 }
